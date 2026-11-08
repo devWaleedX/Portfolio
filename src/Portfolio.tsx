@@ -2248,7 +2248,7 @@ export default function App() {
                 <div className="flex flex-wrap items-center gap-3 p-3.5 rounded-2xl bg-white/[0.04] border border-white/15 max-w-md">
                   <Mail className="w-5 h-5 text-sky-400 shrink-0" />
                   <span className="text-xs sm:text-sm font-mono text-white truncate flex-1">
-                    waleedhassan.dev@gmail.com
+                    waleedhassan95712@gmail.com
                   </span>
                   <button
                     onClick={handleCopyEmail}
