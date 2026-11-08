@@ -1288,7 +1288,7 @@ export default function App() {
   }, [workFilter]);
 
   const handleCopyEmail = () => {
-    const emailPlaceholder = 'waleedhassan.dev@gmail.com';
+    const emailPlaceholder = 'waleedhassan95712@gmail.com';
     if (navigator.clipboard) {
       navigator.clipboard.writeText(emailPlaceholder).catch(() => {});
     }
