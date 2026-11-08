@@ -233,7 +233,7 @@ const PROJECTS = [
       'Persistent cart state with real-time subtotal & quantity controls',
       'Seamless responsive checkout UI and quick-view product configurator'
     ],
-    github:"https://github.com/devWaleedX/Responsive--spotify.git",
+    github:"https://github.com/devWaleedX/EcommerceWebsite.git",
     Live : 'https://ecommerce-website-git-main-devwaleedx.vercel.app/'
   },
   {
@@ -636,7 +636,16 @@ function Tilt3DCard({ children, className = '', glowColor = 'rgba(56, 189, 248, 
 // ==========================================
 // MAGNETIC BUTTON COMPONENT
 // ==========================================
-function MagneticButton({ children, onClick, href, className = '', target }) {
+
+type MagneticButtonProps = {
+  children?: React.ReactNode;
+  onClick?: () => void;
+  href?: string;
+  className?: string;
+  target?: string;
+};
+
+function MagneticButton({ children, onClick, href, className = '', target }: MagneticButtonProps) {
   const btnRef = useRef(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
@@ -1185,7 +1194,7 @@ export default function App() {
 
   // Selected Work Filter & Interactive Modal
   const [workFilter, setWorkFilter] = useState('All');
-  const [activeProjectModal, setActiveProjectModal] = useState(null);
+  const [activeProjectModal, setActiveProjectModal] = useState<any>(null);
 
   // Contact Form State
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
