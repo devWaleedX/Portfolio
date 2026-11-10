@@ -1297,25 +1297,39 @@ export default function App() {
     setTimeout(() => setCopiedEmail(false), 2600);
   };
 
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    setFormError('');
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setFormError('Please fill in your name, email address, and project message.');
-      return;
-    }
-    if (!formData.email.includes('@')) {
-      setFormError('Please provide a valid email address.');
-      return;
-    }
-    setFormStatus('sending');
-    soundFX.playPing(620, 0.08);
-    setTimeout(() => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setFormError('');
+  if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+    setFormError('Please fill in your name, email address, and project message.');
+    return;
+  }
+  if (!formData.email.includes('@')) {
+    setFormError('Please provide a valid email address.');
+    return;
+  }
+  setFormStatus('sending');
+  soundFX.playPing(620, 0.08);
+
+  try {
+    const res = await fetch('https://formspree.io/f/xbggnzrn', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    if (res.ok) {
       setFormStatus('sent');
       soundFX.playPing(960, 0.12);
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1100);
-  };
+    } else {
+      setFormStatus('idle');
+      setFormError('Something went wrong. Please try again or email me directly.');
+    }
+  } catch {
+    setFormStatus('idle');
+    setFormError('Network error. Please try again or email me directly.');
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#030305] text-slate-100 selection:bg-sky-500 selection:text-slate-950 font-sans overflow-x-hidden relative">
